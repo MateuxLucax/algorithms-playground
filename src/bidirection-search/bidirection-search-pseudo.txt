@@ -1,0 +1,23 @@
+BUSCA-BIDIRECIONAL (Estado inicial, Estado meta)
+  Fila abertosCima = new Fila(); Fila abertosBaixo = new Fila();
+  abertosCima.add( new Nó(inicial) )
+  abertosBaixo.add( new Nó(meta) )
+  while not ( abertosCima.isEmpty() and abertosBaixo.isEmpty() do
+    Nó cima = abertosCima.remove )
+    if abertosBaixo.contains(cima) then
+      conectar (cima, abertosBaixo)
+      return solução(meta)
+    end_if
+    abertosCima.add( sucessores(cima) )
+    Nó baixo = abertosBaixo.remove()
+    if abertosCima. contains(baixo) then
+      conectar (baixo, abertosCima)
+      return solução(meta)
+    end_if
+    abertosbaixo.add( antecessores(baixo) )
+  end-while
+  return solução não encontrada
+
+OBS:
+Na fila abertosCima, os nós devem ser adicionados em ordem alfabética decrescente (ex: h, d, b)
+Na fila abertosBaixo, os nós devem ser adicionados em ordem alfabética crescente (ex: k, l, n)

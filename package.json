@@ -1,0 +1,15 @@
+{
+  "name": "algorithms-playground",
+  "version": "1.0.0",
+  "description": "Welcome to my algorithms playground",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "none"
+  },
+  "keywords": [
+    "algorithms"
+  ],
+  "author": "Mateus Lucas Cruz Brandt",
+  "license": "AGPL-3.0-or-later"
+}

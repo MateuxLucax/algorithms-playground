@@ -1,0 +1,26 @@
+BUSCA-PROFUNDIDADE(Estado inicial,int m)
+  Pilha abertos = new Pilha
+  abertos.add( new Nó(inicial) )
+  while not abertos.isEmpty() do
+    Nó atual = abertos. remove
+    if ehMeta(atual.estado) then
+      return solução(atual)
+    end-if
+    if atual. profundidade < m then
+      abertos.add( sucessores(atual) )
+    end-if
+    end-while
+  return solução não encontrada 
+
+BUSCA-PROFUNDIDADE-ITERATIVA(Estado inicial)
+  int profundidade = 1
+  while true do
+    solução = BUSCA-PROFUNDIDADE(inicial, profundidade)
+    if solução != null then
+      return solução
+    end-if
+    profundidade = profundidade + 1
+  end-while
+
+OBS:
+Na pilha de abertos, os nós devem ser adicionados sempre em ordem alfabética crescente (ex: b, d, k)
