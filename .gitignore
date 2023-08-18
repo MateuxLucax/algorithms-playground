@@ -1,0 +1,11 @@
+# Deno
+*.deno.lock
+*.deno.json
+*.tsbuildinfo
+# Build output
+**/dist
+**/node_modules
+# Other
+.env
+.idea
+.vscode
