@@ -1,37 +1,52 @@
-export default class Graph<T> {
-  private _adjacencyList: Map<T, T[]>;
+export default class Graph {
+  private adjacencyList: Map<string, { vertex: string, weight: number }[]>;
+  private isDirected: boolean;
 
-  constructor(map: Map<T, T[]>) {
-    this._adjacencyList = map;
+  constructor(isDirected = false) {
+    this.adjacencyList = new Map();
+    this.isDirected = isDirected;
   }
 
-  addEdge(origin: T, destination: T): void {
-    if (!this._adjacencyList.has(origin)) {
-      this._adjacencyList.set(origin, []);
+  static of(isDirected = false): Graph {
+    return new Graph(isDirected);
+  }
+
+  addVertex(vertex: string): void {
+    if (!this.adjacencyList.has(vertex)) {
+      this.adjacencyList.set(vertex, []);
+    }
+  }
+
+  addEdge(source: string, destination: string, weight: number): this {
+    if (!this.adjacencyList.has(source)) this.addVertex(source);
+    if (!this.adjacencyList.has(destination)) this.addVertex(destination);
+
+    this.adjacencyList.get(source)?.push({ vertex: destination, weight });
+    if (!this.isDirected) {
+      this.adjacencyList.get(destination)?.push({ vertex: source, weight });
     }
 
-    this._adjacencyList.get(origin)?.push(destination);
+    return this;
   }
 
-  successors(currentNode: T): T[] {
-    const successors = this._adjacencyList.get(currentNode);
-    if (successors === undefined) return [];
-
-    return successors;
+  getVertex(vertex: string): { vertex: string, weight: number }[] | undefined {
+    return this.adjacencyList.get(vertex);
   }
 
-  predecessors(currentNode: T): T[] {
-    const predecessors: T[] = [];
+  getAdjacentVertices(vertex: string): { vertex: string, weight: number }[] | undefined{
+    return this.adjacencyList.get(vertex);
+  }
 
-    for (const [key, value] of this._adjacencyList) {
-      if (value.includes(currentNode)) predecessors.push(key);
+  print(): void {
+    const vertices = this.adjacencyList.keys();
+
+    for (const vertex of vertices) {
+      const values = this.adjacencyList.get(vertex)!;
+      let output = "";
+
+      for (const value of values) {
+        output += `${value.vertex}(${value.weight}) `;
+      }
     }
-
-    return predecessors;
-  }
-
-
-  get adjacencyList(): Map<T, T[]> {
-    return this._adjacencyList;
   }
 }

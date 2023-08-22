@@ -1,24 +1,25 @@
 import Graph from "../models/Graph.ts";
 
-export default new Graph(new Map<string, string[]>([
-  ['A', ['B', 'H']],
-  ['B', ['A', 'C']],
-  ['C', ['B', 'D', 'H']],
-  ['D', ['C', 'E']],
-  ['E', ['D', 'F']],
-  ['F', ['E', 'G']],
-  ['G', ['F', 'J']],
-  ['H', ['A', 'C', 'I', 'K']],
-  ['I', ['H', 'J', 'L']],
-  ['J', ['G', 'I', 'L']],
-  ['K', ['H', 'M']],
-  ['L', ['I', 'J', 'M']],
-  ['M', ['K', 'L', 'N', 'O']],
-  ['N', ['M']],
-  ['O', ['M', 'P', 'R']],
-  ['P', ['O', 'Q']],
-  ['Q', ['P']],
-  ['R', ['O', 'S']],
-  ['S', ['R', 'T']],
-  ['T', ['S']],
-]));
+export default Graph.of()
+  .addEdge("A", "B", 71)
+  .addEdge("A", "H", 151)
+  .addEdge("B", "C", 75)
+  .addEdge("C", "D", 118)
+  .addEdge("C", "H", 140)
+  .addEdge("D", "E", 111)
+  .addEdge("E", "F", 75)
+  .addEdge("F", "G", 99)
+  .addEdge("G", "J", 120)
+  .addEdge("H", "I", 80)
+  .addEdge("I", "J", 146)
+  .addEdge("I", "L", 97)
+  .addEdge("H", "K", 99)
+  .addEdge("K", "M", 211)
+  .addEdge("L", "M", 101)
+  .addEdge("M", "N", 90)
+  .addEdge("N", "O", 85)
+  .addEdge("O", "P", 98)
+  .addEdge("P", "Q", 86)
+  .addEdge("O", "R", 142)
+  .addEdge("R", "S", 92)
+  .addEdge("S", "T", 87);

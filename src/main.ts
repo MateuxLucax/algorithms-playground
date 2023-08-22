@@ -1,31 +1,30 @@
 import { assertEquals } from 'https://deno.land/std@0.198.0/assert/assert_equals.ts';
 
 import BreadthFirstSearch from './algorithms/BreadthFirstSearch.ts';
-import BreadthFirstSearchDumb from './algorithms/BreadthFirstSearchDumb.ts';
 import ExampleGraph from './examples/ExampleGraph.ts';
+import Node from './models/Node.ts';
 import DepthLimitedSearch from './algorithms/DepthLimitedSearch.ts';
 import IterativeDepthLimitedSearch from './algorithms/IterativeDepthLimitedSearch.ts';
 
-Deno.bench('Breadth First Search Algorithm', () => {
-  const bfs = new BreadthFirstSearchDumb(ExampleGraph, 'A', 'M');
-  const solution = bfs.search();
-  assertEquals(solution, ['A', 'H', 'K', 'M']);
-});
+const metaState = new Node({ value: 0, label: 'M' });
+const initialState = new Node({ value: 0, label: 'C' });
 
-Deno.bench('Breadth First Search Algorithm (with optimization)', () => {
-  const bfs = new BreadthFirstSearch(ExampleGraph, 'A', 'M');
-  const solution = bfs.search();
-  assertEquals(solution, ['A', 'H', 'K', 'M']);
+const expectedSolution = ['C', 'H', 'K', 'M'];
+
+Deno.bench('Breadth First Search Algorithm', () => {
+  const algorithm = new BreadthFirstSearch(ExampleGraph, initialState, metaState);
+  const solution = algorithm.search();
+  assertEquals(solution, expectedSolution);
 });
 
 Deno.bench('Depth Limited Search Algorithm', () => {
-  const bfs = new DepthLimitedSearch(ExampleGraph, 'A', 'M', 5);
-  const solution = bfs.search();
-  assertEquals(solution, ['A', 'H', 'K', 'M']);
+  const algorithm = new DepthLimitedSearch(ExampleGraph, initialState, metaState);
+  const solution = algorithm.search(4);
+  assertEquals(solution, expectedSolution);
 });
 
 Deno.bench('Iterative Depth Limited Search Algorithm', () => {
-  const bfs = new IterativeDepthLimitedSearch(ExampleGraph, 'A', 'M', 5);
-  const solution = bfs.search();
-  assertEquals(solution, ['A', 'H', 'K', 'M']);
+  const algorithm = new IterativeDepthLimitedSearch(ExampleGraph, initialState, metaState);
+  const solution = algorithm.search(4);
+  assertEquals(solution, expectedSolution);
 });
